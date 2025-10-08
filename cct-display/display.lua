@@ -1,6 +1,6 @@
 local endpoint = "http://localhost:3000/dotmatrix"
 local station = "ehv"
-local platform = 1
+local platform = "1"
 
 term.setGraphicsMode(1)
 term.clear()
@@ -76,6 +76,34 @@ local function keyListener()
       platform = 5
     elseif key == 7 then
       platform = 6
+    elseif key == 8 then
+      platform = 7
+    elseif key == 9 then
+      platform = 8
+    elseif key == 10 then
+      platform = 9
+    elseif key == keys.q then
+      platform = 10
+    elseif key == keys.w then
+      platform = 11
+    elseif key == keys.e then
+      platform = 12
+    elseif key == keys.r then
+      platform = 13
+    elseif key == keys.t then
+      platform = 14 
+    elseif key == keys.y then
+      platform = 15
+    elseif key == keys.u then
+      platform = 16
+    elseif key == keys.i then
+      platform = 17
+    elseif key == keys.o then
+      platform = 18
+    elseif key == keys.p then
+      platform = 19
+    elseif key == keys["["] then
+      platform = 20
     end
     --draw()
   end

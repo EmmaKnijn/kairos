@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="558066fc-bfc3-4eb5-aa5f-7b07c22ec08b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/rendering/symbol-font.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cct-display/display.lua" beforeDir="false" afterPath="$PROJECT_DIR$/cct-display/display.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rendering/font.js" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/font.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rendering/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rendering/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rendering/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rendering/symbol-font.js" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/symbol-font.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rendering/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,31 +39,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.font.js.executor": "Run",
-    "Node.js.index.js.executor": "Run",
-    "Node.js.utils.js.executor": "Run",
-    "Python.index.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "D:/GitHub/kairos/rendering",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.font.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.index.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.utils.js.executor&quot;: &quot;Run&quot;,
+    &quot;Python.index.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GitHub/kairos/rendering&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\GitHub\kairos\rendering" />
@@ -96,7 +97,9 @@
       <workItem from="1759217395716" duration="550000" />
       <workItem from="1759218224077" duration="8073000" />
       <workItem from="1759239974917" duration="26750000" />
-      <workItem from="1759476562997" duration="6723000" />
+      <workItem from="1759476562997" duration="12533000" />
+      <workItem from="1759821250770" duration="8548000" />
+      <workItem from="1759917260067" duration="1565000" />
     </task>
     <servers />
   </component>

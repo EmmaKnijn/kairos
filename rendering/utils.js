@@ -46,6 +46,9 @@ module.exports.drawText = (pixels, text, startX, startY, color, font) => {
                 for (let x = 0; x < CHARACTER_WIDTH; x++) {
                     // If the bitmap pixel is "on" (equal to 1)
                     if (charBitmap[y][x] === 1) {
+                        if (font.colorOverwrites && font.colorOverwrites[char]) {
+                            color = font.colorOverwrites[char]
+                        }
                         // Calculate the target pixel's coordinates on the main grid
                         const targetX = cursorX + x;
                         const targetY = startY + y;

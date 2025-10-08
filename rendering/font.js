@@ -574,5 +574,5 @@ module.exports = {
     ],
     'height': 7,
     'width': 5,
-    'spacing': 1
+    'spacing': 1,
 };

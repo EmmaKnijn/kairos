@@ -91,3 +91,49 @@ module.exports.trainLengthLUT = {
     'DDZ-4': 4,
     'DDZ-6': 6,
 }
+
+module.exports.getTimeData = (departure, arrival) => {
+    const currentTime = new Date()
+    let arrivalTime
+    let arrivalDelay
+    const departureTime = new Date(departure.departure_time)
+    const departureDelay = Math.ceil(departure.delay / 60)
+
+    if(arrival) {
+        arrivalTime = new Date(arrival.arrival_time)
+        arrivalDelay = Math.ceil(arrival.delay / 60)
+    }
+    return {'currentTime': currentTime,'arrivalTime':arrivalTime,'departureTime':departureTime,'arrivalDelay':arrivalDelay,'departureDelay':departureDelay}
+}
+
+module.exports.getPhase = () => {
+    const currentTime = new Date()
+    let signPhase = 1
+    if (currentTime.getSeconds() < 15) {
+        signPhase = 1
+    } else if (currentTime.getSeconds() < 30 ) {
+        signPhase = 2
+    } else if (currentTime.getSeconds() < 45) {
+        signPhase = 3
+    } else { signPhase = 4}
+
+    return signPhase || 1
+}
+
+module.exports.getBusyness = (type) => {
+    const length = getTrainLength(type)
+    let data = {}
+    for (let i = 1; i <= length; i++) {
+        data[i] = Math.round(Math.random() * 3)
+    }
+    return data
+}
+
+module.exports.isAtStation = (departure, arrival) => {
+    let timeData = utils.getTimeData(departure, arrival)
+    if ((timeData.arrivalTime) <= timeData.currentTime) {
+        return true
+    } else {
+        return false
+    }
+}

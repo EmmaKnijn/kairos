@@ -12,56 +12,9 @@ const tinyFont = require("./tiny-font");
 const symbolFont = require('./symbol-font');
 const font = require("./font");
 
-function getPhase() {
-    const currentTime = new Date()
-    let signPhase = 1
-    if (currentTime.getSeconds() < 15) {
-       signPhase = 1
-    } else if (currentTime.getSeconds() < 30 ) {
-        signPhase = 2
-    } else if (currentTime.getSeconds() < 45) {
-        signPhase = 3
-    } else { signPhase = 4}
-
-    return signPhase || 1
-}
-
-function getTimeData(departure, arrival) {
-
-    const currentTime = new Date()
-    let arrivalTime
-    let arrivalDelay
-    const departureTime = new Date(departure.departure_time)
-    const departureDelay = Math.ceil(departure.delay / 60)
-
-    if(arrival) {
-        arrivalTime = new Date(arrival.arrival_time)
-        arrivalDelay = Math.ceil(arrival.delay / 60)
-    }
-    return {'currentTime': currentTime,'arrivalTime':arrivalTime,'departureTime':departureTime,'arrivalDelay':arrivalDelay,'departureDelay':departureDelay}
-}
 
 function getTrainLength(type) {
     return utils.trainLengthLUT[type] || 0
-}
-
-function getBusyness(type) {
-    const length = getTrainLength(type)
-    let data = {}
-    for (let i = 1; i <= length; i++) {
-        data[i] = Math.round(Math.random() * 3)
-    }
-    return data
-}
-
-function isAtStation(departure, arrival) {
-    let timeData = getTimeData(departure, arrival)
-    if ((timeData.arrivalTime) <= timeData.currentTime) {
-        return true
-    } else {
-        return false
-    }
-    return false
 }
 
 app.get('/dotmatrix/:station/:location', (req, res) => {
@@ -85,8 +38,8 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                     const font = require('./font')
                     const tinyFont = require('./tiny-font')
 
-                    let signPhase = getPhase()
-                    let timeData = getTimeData(departure, arrival)
+                    let signPhase = utils.getPhase()
+                    let timeData = utils.getTimeData(departure, arrival)
 
                     const textColor = { r: 255, g: 255, b: 255 }; // Black color
                     const redColor = { r: 255, g: 0, b: 0 }; // Red color
@@ -235,7 +188,7 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                             }
                             offset = string.length * symbolFont.width / 2
 
-                            const busyness = getBusyness(material.type)
+                            const busyness = utils.getBusyness(material.type)
 
 
                             let characters = 2 + length + length - 1

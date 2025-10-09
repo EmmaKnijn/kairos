@@ -237,7 +237,7 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                     utils.drawText(pixels, destinationline1, 1, 13, textColor, font);
                     utils.drawText(pixels, destinationline2, 1, 23, textColor, font);
                     utils.drawText(pixels, vialine1, 1, 23 + viaOffset, textColor, tinyFont);
-                    utils.drawText(pixels, vialine2, 1, 28 + viaOffset, textColor, tinyFont);
+                    utils.drawText(pixels, vialine2, 1, 29 + viaOffset, textColor, tinyFont);
                     //console.log(isAtStation(departure,arrival))
                     for (let x = 0; x <= 128; x++) {
                         pixels[64][x] = statusColor

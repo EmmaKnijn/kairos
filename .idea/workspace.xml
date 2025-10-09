@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="558066fc-bfc3-4eb5-aa5f-7b07c22ec08b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cct-display/display.lua" beforeDir="false" afterPath="$PROJECT_DIR$/cct-display/display.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rendering/font.js" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/font.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rendering/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rendering/symbol-font.js" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/symbol-font.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rendering/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rendering/tiny-font.js" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/tiny-font.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +97,7 @@
       <workItem from="1759476562997" duration="12533000" />
       <workItem from="1759821250770" duration="8548000" />
       <workItem from="1759917260067" duration="1565000" />
+      <workItem from="1759996932337" duration="1575000" />
     </task>
     <servers />
   </component>

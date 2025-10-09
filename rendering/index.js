@@ -42,45 +42,7 @@ function getTimeData(departure, arrival) {
 }
 
 function getTrainLength(type) {
-    if (type === 'FLIRT FFF-3') {
-        return 3
-    } else if (type === 'FLIRT FFF-4') {
-        return 4
-    } else if (type === 'VIRM-4') {
-        return 4
-    } else if (type === 'ICNG25-5') {
-        return 5
-    } else if (type === 'VIRM-6') {
-        return 6
-    } else if (type === 'FLIRT ARL-2/6') {
-        return 2
-    } else if (type === 'FLIRT ARL-2/8') {
-        return 3
-    } else if (type === 'GTW-E-ARL-2/6') {
-        return 2
-    } else if (type === 'GTW-E-ARL-2/8') {
-        return 3
-    } else if (type === 'GTW-D-ARL-2/6') {
-        return 2
-    } else if (type === 'GTW-D-ARL-2/8') {
-        return 3
-    } else if (type === 'SNG-3') {
-        return 3
-    } else if (type === "SNG-4") {
-        return 4
-    } else if (type === "SLT-3") {
-        return 3
-    } else if (type === "SLT-4") {
-        return 4
-    } else if (type === "ICM-3") {
-        return 3
-    } else if (type === "ICM-4") {
-        return 4
-    } else if (type === "DDZ-4") {
-        return 4
-    } else if (type === "DDZ-6") {
-        return 6
-    }
+    return utils.trainLengthLUT[type] || 0
 }
 
 function getBusyness(type) {

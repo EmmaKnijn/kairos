@@ -69,3 +69,25 @@ module.exports.drawText = (pixels, text, startX, startY, color, font) => {
         }
     }
 }
+
+module.exports.trainLengthLUT = {
+    'FLIRT FFF-3': 3,
+    'FLIRT FFF-4': 4,
+    'VIRM-4': 4,
+    'ICNG25-5': 5,
+    'VIRM-6': 6,
+    'FLIRT ARL-2/6': 2,
+    'FLIRT ARL-2/8': 3,
+    'GTW-E-ARL-2/6': 2,
+    'GTW-E-ARL-2/8': 3,
+    'GTW-D-ARL-2/6': 2,
+    'GTW-D-ARL-2/8': 3,
+    'SNG-3': 3,
+    'SNG-4': 4,
+    'SLT-3': 3,
+    'SLT-4': 4,
+    'ICM-3': 3,
+    'ICM-4': 4,
+    'DDZ-4': 4,
+    'DDZ-6': 6,
+}

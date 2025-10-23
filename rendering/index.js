@@ -12,11 +12,6 @@ const tinyFont = require("./tiny-font");
 const symbolFont = require('./symbol-font');
 const font = require("./font");
 
-
-function getTrainLength(type) {
-    return utils.trainLengthLUT[type] || 0
-}
-
 app.get('/dotmatrix/:station/:location', (req, res) => {
 
     let pixels = {}
@@ -30,10 +25,7 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
     utils.getJSON(endpoint + '/v2/departures/station/' + req.params.station.toUpperCase(), (data) => {
         for (const [key, departure] of Object.entries(data.departures)) {
             if (departure.platform_actual === req.params.location) {
-                // Function to render the display with the departure and arrival data
                 const renderDisplay = (departure, arrival, service) => {
-                    //console.log(departure)
-                    //console.log(arrival)
 
                     const font = require('./font')
                     const tinyFont = require('./tiny-font')
@@ -50,7 +42,7 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                     let minuteDelay = 0
 
 
-                    if (arrival && !isAtStation(departure,arrival)) {
+                    if (arrival && !utils.isAtStation(departure,arrival)) {
                         minuteDelay = timeData.arrivalDelay
                         shownTime = timeData.arrivalTime
                     } else {
@@ -60,7 +52,7 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                     let statusMessage = ""
                     let statusColor = blackColor
                     const timeUntilEvent = Math.floor((shownTime - timeData.currentTime) / 1000 / 60)
-                    if (isAtStation(departure,arrival)) {
+                    if (utils.isAtStation(departure,arrival)) {
                         statusMessage = ""
                         statusColor = greenColor
                     }
@@ -153,43 +145,37 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                     utils.drawText(pixels, destinationline2, 1, 23, textColor, font);
                     utils.drawText(pixels, vialine1, 1, 23 + viaOffset, textColor, tinyFont);
                     utils.drawText(pixels, vialine2, 1, 29 + viaOffset, textColor, tinyFont);
-                    //console.log(isAtStation(departure,arrival))
                     for (let x = 0; x <= 128; x++) {
                         pixels[64][x] = statusColor
                     }
                     utils.drawText(pixels, statusMessage, 1, 56, statusColor, font);
                     const offset = departure.platform_actual.length * font.width + departure.platform_actual.length * 2
-                    //console.log(offset)
                     utils.drawText(pixels, departure.platform_actual, 127 - offset, 56, textColor, font);
 
 
                     if(service) {
                         let trainSetStartPoint = 0
-                        console.log("service found")
-                        //let cursorPos = 0
-                        let string = ''
+                        let trainString = ''
                         let offset
                         let busynessString = ' '
                         let materialIndex = 0
                         for (const [key, material] of Object.entries(service.material)) {
                             materialIndex = materialIndex + 1
-                            console.log(material.type)
-                            const length = getTrainLength(material.type)
+                            const length = utils.getTrainLength(material.type)
                             if (length === 6) {
-                                string += 'ABDBDBDBDBDBC'
+                                trainString += 'ABDBDBDBDBDBC'
                             } else if (length === 4) {
-                                string += 'ABDBDBDBC'
+                                trainString += 'ABDBDBDBC'
                             } else if (length === 3) {
-                                string += 'ABDBDBC'
+                                trainString += 'ABDBDBC'
                             } else if (length === 5) {
-                                string += 'ABDBDBDBDBC'
+                                trainString += 'ABDBDBDBDBC'
                             } else if (length === 2) {
-                                string += 'ABDBC'
+                                trainString += 'ABDBC'
                             }
-                            offset = string.length * symbolFont.width / 2
+                            offset = trainString.length * symbolFont.width / 2
 
                             const busyness = utils.getBusyness(material.type)
-
 
                             let characters = 2 + length + length - 1
                             if (materialIndex == 1) {
@@ -197,10 +183,7 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                             } else {
                                 trainSetStartPoint = trainSetStartPoint + characters * symbolFont.width
                             }
-                            console.log(busyness)
-                            console.log(trainSetStartPoint)
                             for(const [key, busynessAmount] of Object.entries(busyness)) {
-                                console.log(busynessAmount)
                                 if(busynessAmount == 1) {
                                     busynessString += 'E '
                                 } else if(busynessAmount == 2) {
@@ -213,10 +196,9 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                             }
                             busynessString += ' '
                         }
-                        console.log(busynessString)
                         utils.drawText(pixels,busynessString,64 - offset,48,textColor,symbolFont)
 
-                        utils.drawText(pixels,string,64 - offset,46,textColor,symbolFont)
+                        utils.drawText(pixels,trainString,64 - offset,46,textColor,symbolFont)
                     }
 
                     res.send(pixels)
@@ -237,7 +219,6 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                         if(data) {
                             for (const [key, partsData] of Object.entries(data.service.parts)) {
                                 for (const [key, stopData] of Object.entries(partsData.stops)) {
-                                    //console.log(stopData)
                                     if (stopData.station.code === req.params.station.toUpperCase()) {
                                         service = stopData
                                         break
@@ -256,5 +237,5 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App listening on port ${port}`)
 })

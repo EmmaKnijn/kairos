@@ -106,6 +106,15 @@ module.exports.getTimeData = (departure, arrival) => {
     return {'currentTime': currentTime,'arrivalTime':arrivalTime,'departureTime':departureTime,'arrivalDelay':arrivalDelay,'departureDelay':departureDelay}
 }
 
+module.exports.isAtStation = (departure, arrival) => {
+        let timeData = module.exports.getTimeData(departure, arrival)
+        if ((timeData.arrivalTime) <= timeData.currentTime) {
+            return true
+        } else {
+            return false
+        }
+    }
+
 module.exports.getPhase = () => {
     const currentTime = new Date()
     let signPhase = 1
@@ -120,20 +129,15 @@ module.exports.getPhase = () => {
     return signPhase || 1
 }
 
-module.exports.getBusyness = (type) => {
-    const length = getTrainLength(type)
-    let data = {}
-    for (let i = 1; i <= length; i++) {
-        data[i] = Math.round(Math.random() * 3)
+module.exports.getTrainLength = (type) => {
+        return module.exports.trainLengthLUT[type] || 0
     }
-    return data
-}
+    module.exports.getBusyness = (type) => {
+        const length = module.exports.getTrainLength(type)
+        let data = {}
+        for (let i = 1; i <= length; i++) {
+            data[i] = Math.round(Math.random() * 3)
+        }
+        return data
+    }
 
-module.exports.isAtStation = (departure, arrival) => {
-    let timeData = utils.getTimeData(departure, arrival)
-    if ((timeData.arrivalTime) <= timeData.currentTime) {
-        return true
-    } else {
-        return false
-    }
-}

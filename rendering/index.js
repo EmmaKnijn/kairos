@@ -82,7 +82,7 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                     }
 
                     if (departure.cancelled) {
-                        utils.drawText(pixels,"Train does not depart", 1, 2, redColor, font);
+                        //utils.drawText(pixels,"Train does not depart", 1, 2, redColor, font);
                     } else {
                         utils.drawText(pixels, parsedDelay, 1, 2, redColor, font);
                         utils.drawText(pixels, parsedTime, 1 + timeOffset, 2, textColor, font);
@@ -140,22 +140,23 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
 
                     let timeString = timeData.currentTime.getHours() + ":" + String(timeData.currentTime.getMinutes()).padStart(2, '0')
                     let timeStringOffset = timeString.length * tinyFont.width + timeString.length * 2
-                    utils.drawText(pixels, timeString, 128 - timeStringOffset, 2, textColor, tinyFont);
-                    utils.drawText(pixels, destinationline1, 1, 13, textColor, font);
-                    utils.drawText(pixels, destinationline2, 1, 23, textColor, font);
-                    utils.drawText(pixels, vialine1, 1, 23 + viaOffset, textColor, tinyFont);
-                    utils.drawText(pixels, vialine2, 1, 29 + viaOffset, textColor, tinyFont);
+                    //utils.drawText(pixels, timeString, 128 - timeStringOffset, 2, textColor, tinyFont);
+                    //utils.drawText(pixels, destinationline1, 1, 13, textColor, font);
+                    //utils.drawText(pixels, destinationline2, 1, 23, textColor, font);
+                    //utils.drawText(pixels, vialine1, 1, 23 + viaOffset, textColor, tinyFont);
+                    //utils.drawText(pixels, vialine2, 1, 29 + viaOffset, textColor, tinyFont);
                     for (let x = 0; x <= 128; x++) {
                         pixels[64][x] = statusColor
                     }
                     utils.drawText(pixels, statusMessage, 1, 56, statusColor, font);
-                    const offset = departure.platform_actual.length * font.width + departure.platform_actual.length * 2
-                    utils.drawText(pixels, departure.platform_actual, 127 - offset, 56, textColor, font);
+                    //const offset = departure.platform_actual.length * font.width + departure.platform_actual.length * 2
+                    //utils.drawText(pixels, departure.platform_actual, 127 - offset, 56, textColor, font);
 
 
                     if(service) {
                         let trainSetStartPoint = 0
                         let trainString = ''
+                        let trainTypeString = ''
                         let offset
                         let busynessString = ' '
                         let materialIndex = 0
@@ -173,6 +174,8 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                             } else if (length === 2) {
                                 trainString += 'ABDBC'
                             }
+                            console.log(trainString.length / 2 - material.type.length)
+                            trainTypeString += material.type.padStart(trainString.length / 2 - material.type.length," ").padEnd(trainString.length / 2 - material.type.length," ")
                             offset = trainString.length * symbolFont.width / 2
 
                             const busyness = utils.getBusyness(material.type)
@@ -196,9 +199,10 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                             }
                             busynessString += ' '
                         }
-                        utils.drawText(pixels,busynessString,64 - offset,48,textColor,symbolFont)
+                        utils.drawText(pixels,busynessString,64 - offset,20,textColor,symbolFont)
 
-                        utils.drawText(pixels,trainString,64 - offset,46,textColor,symbolFont)
+                        utils.drawText(pixels,trainString,64 - offset,18,textColor,symbolFont)
+                        utils.drawText(pixels,trainTypeString,64 - offset,12,textColor,tinyFont)
                     }
 
                     res.send(pixels)

@@ -19,3 +19,10 @@ services:
       - 3000:3000
     depends_on:
       - gotrain
+  router:
+    image: kairos-router
+    build: ./router/
+    ports:
+      - 80:80
+    depends_on:
+      - rendering

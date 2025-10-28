@@ -12,4 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build  Docker image
-      run: docker build ./rendering/ --file Dockerfile --tag kairos-rendering:$(date +%s)
+      run: cd rendering && docker build . --file Dockerfile --tag kairos-rendering:$(date +%s)

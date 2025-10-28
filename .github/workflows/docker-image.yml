@@ -1,13 +1,21 @@
-name: Docker Image CI
+name: Rendering Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+    tags:
+      - v*
   pull_request:
-    branches: [ "main" ]
+    
+env:
+  IMAGE_NAME: kairos-rendering
 
 jobs:
   build:
+    permissions:
+      packages: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4

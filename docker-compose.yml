@@ -11,8 +11,7 @@ services:
     ports:
       - 8080:8080
   rendering:
-    image: kairos-rendering
-    build: rendering/
+    image: ghcr.io/emmaknijn/kairos-rendering:latest
     environment:
       - ENDPOINT=http://gotrain:8080
       - PORT=3000

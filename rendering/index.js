@@ -174,7 +174,7 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
                             } else if (length === 2) {
                                 trainString += 'ABDBC'
                             }
-                            console.log(trainString.length / 2 - material.type.length)
+                            //console.log(trainString.length / 2 - material.type.length)
                             trainTypeString += material.type.padStart(trainString.length / 2 - material.type.length," ").padEnd(trainString.length / 2 - material.type.length," ")
                             offset = trainString.length * symbolFont.width / 2
 
@@ -241,5 +241,5 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`App listening on port ${port}`)
+  console.log(`Kairos Rendering API listening on port ${port}`)
 })

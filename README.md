@@ -1,6 +1,6 @@
 # 🚆Kairos
 Kairos is a public transport information platform. It currently consists of a few components.
-*note* As this is a project developed by me for uni, no support / updates are garuanteed. 
+*note* As this is a project developed by me for uni, no support / updates are guaranteed. 
 
 ## Components
 ### Rendering API

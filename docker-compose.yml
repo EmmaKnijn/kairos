@@ -1,0 +1,22 @@
+name: kairos
+services:
+  gotrain:
+    image: rijdendetreinen/gotrain
+    environment:
+      - API_ADDRESS=:8080
+      - SOURCE_SERVER=tcp://pubsub.besteffort.ndovloket.nl:7664
+      - SOURCE_ENVELOPES_ARRIVALS=/RIG/InfoPlusDASInterface4
+      - SOURCE_ENVELOPES_DEPARTURES=/RIG/InfoPlusDVSInterface4
+      - SOURCE_ENVELOPES_SERVICES=/RIG/InfoPlusRITInterface5
+    ports:
+      - 8080:8080
+  rendering:
+    image: kairos-rendering
+    build: rendering/
+    environment:
+      - ENDPOINT=http://172.18.0.2:8080
+      - PORT=3000
+    ports:
+      - 3000:3000
+    depends_on:
+      - gotrain

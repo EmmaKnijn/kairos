@@ -1,5 +1,5 @@
 local endpoint = "http://localhost:3000/dotmatrix"
-local station = "ehv"
+local station = "ut"
 local platform = "1"
 
 term.setGraphicsMode(1)

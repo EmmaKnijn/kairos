@@ -14,7 +14,7 @@ services:
     image: kairos-rendering
     build: rendering/
     environment:
-      - ENDPOINT=http://172.18.0.2:8080
+      - ENDPOINT=http://gotrain:8080
       - PORT=3000
     ports:
       - 3000:3000

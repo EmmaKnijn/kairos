@@ -181,6 +181,12 @@ module.exports.getArrival = (data,departure) => {
 }
 
 module.exports.getService = (data,station) => {
+    if (!data) {
+        return
+    }
+    if(!data.service) {
+        return
+    }
     for (const [key, partsData] of Object.entries(data.service.parts)) {
         for (const [key, stopData] of Object.entries(partsData.stops)) {
             if (stopData.station.code === station.toUpperCase()) {

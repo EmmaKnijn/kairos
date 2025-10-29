@@ -10,6 +10,7 @@ services:
       - SOURCE_ENVELOPES_SERVICES=/RIG/InfoPlusRITInterface5
     ports:
       - 8080:8080
+    restart: always
   rendering:
     image: ghcr.io/emmaknijn/kairos-rendering:latest
     environment:
@@ -19,9 +20,12 @@ services:
       - 3000:3000 
     depends_on:
       - gotrain
+    restart: always
   router:
     image: ghcr.io/emmaknijn/kairos-router:latest
     ports:
       - 80:80
     depends_on:
       - rendering
+      - gotrain
+    restart: always

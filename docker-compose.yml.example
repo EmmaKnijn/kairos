@@ -11,6 +11,8 @@ services:
     ports:
       - 8080:8080
     restart: always
+    volumes:
+      - './data/:/data/'
   rendering:
     image: ghcr.io/emmaknijn/kairos-rendering:latest
     environment:

@@ -1,6 +1,6 @@
-const font = require('./font')
-const tinyFont = require('./tiny-font')
-const symbolFont = require("./symbol-font");
+const font = require('./fonts/main-font')
+const tinyFont = require('./fonts/tiny-font')
+const symbolFont = require("./fonts/symbol-font");
 
 const utils = require('./utils')
 

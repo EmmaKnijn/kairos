@@ -1,7 +1,7 @@
 const http = require('http');
-const font = require("./font");
-const tinyFont = require("./tiny-font");
-const symbolFont = require("./symbol-font");
+const font = require("./fonts/main-font");
+const tinyFont = require("./fonts/tiny-font");
+const symbolFont = require("./fonts/symbol-font");
 
 // source: https://stackoverflow.com/questions/9577611/how-to-make-an-http-get-request-in-node-js-express
 

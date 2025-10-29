@@ -6,7 +6,7 @@ const app = express()
 const utils = require('./utils')
 const renderers = require("./renderers")
 
-const endpoint = process.env.ENDPOINT || 'http://192.168.130.121:8080'
+const endpoint = process.env.ENDPOINT || 'http://localhost:8080'
 const port = process.env.PORT || 3000
 
 app.get('/dotmatrix/:station/:location', (req, res) => {

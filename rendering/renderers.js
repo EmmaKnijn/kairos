@@ -5,10 +5,7 @@ const symbolFont = require("./symbol-font");
 const utils = require('./utils')
 
 module.exports.render128x64 = (departure, arrival, service) => {
-
     let pixels = utils.clearScreen(128,64)
-
-
 
     let signPhase = utils.getPhase()
     let timeData = utils.getTimeData(departure, arrival)
@@ -18,9 +15,11 @@ module.exports.render128x64 = (departure, arrival, service) => {
     const greenColor = { r: 0, g: 255, b: 0 }; // Green color
     const orangeColor = { r: 255, g: 165, b: 0 }; // Orange color
     const blackColor = {r: 0, g: 0, b: 0}; // Black color
+
     let shownTime
     let minuteDelay = 0
-
+    let statusMessage = ""
+    let statusColor = blackColor
 
     if (arrival && !utils.isAtStation(departure,arrival)) {
         minuteDelay = timeData.arrivalDelay
@@ -29,9 +28,9 @@ module.exports.render128x64 = (departure, arrival, service) => {
         minuteDelay = timeData.departureDelay
         shownTime = timeData.departureTime
     }
-    let statusMessage = ""
-    let statusColor = blackColor
+
     const timeUntilEvent = Math.floor((shownTime - timeData.currentTime) / 1000 / 60)
+
     if (utils.isAtStation(departure,arrival)) {
         statusMessage = ""
         statusColor = greenColor
@@ -61,9 +60,7 @@ module.exports.render128x64 = (departure, arrival, service) => {
         }
     }
 
-    if (departure.cancelled) {
-        //utils.drawText(pixels,"Train does not depart", 1, 2, redColor, font);
-    } else {
+    if (!departure.cancelled) {
         utils.drawText(pixels, parsedDelay, 1, 2, redColor, font);
         utils.drawText(pixels, parsedTime, 1 + timeOffset, 2, textColor, font);
     }
@@ -143,17 +140,7 @@ module.exports.render128x64 = (departure, arrival, service) => {
         for (const [key, material] of Object.entries(service.material)) {
             materialIndex = materialIndex + 1
             const length = utils.getTrainLength(material.type)
-            if (length === 6) {
-                trainString += 'ABDBDBDBDBDBC'
-            } else if (length === 4) {
-                trainString += 'ABDBDBDBC'
-            } else if (length === 3) {
-                trainString += 'ABDBDBC'
-            } else if (length === 5) {
-                trainString += 'ABDBDBDBDBC'
-            } else if (length === 2) {
-                trainString += 'ABDBC'
-            }
+            trainString += utils.trainStringLUT[length]
             //console.log(trainString.length / 2 - material.type.length)
             trainTypeString += material.type.padStart(trainString.length / 2 - material.type.length," ").padEnd(trainString.length / 2 - material.type.length," ")
             offset = trainString.length * symbolFont.width / 2
@@ -179,8 +166,8 @@ module.exports.render128x64 = (departure, arrival, service) => {
             }
             busynessString += ' '
         }
-        utils.drawText(pixels,busynessString,64 - offset,20,textColor,symbolFont)
 
+        utils.drawText(pixels,busynessString,64 - offset,20,textColor,symbolFont)
         utils.drawText(pixels,trainString,64 - offset,18,textColor,symbolFont)
         utils.drawText(pixels,trainTypeString,64 - offset,12,textColor,tinyFont)
     }

@@ -95,6 +95,14 @@ module.exports.trainLengthLUT = {
     'DDZ-6': 6,
 }
 
+module.exports.trainStringLUT = {
+    2: 'ABDBC',
+    3: 'ABDBDBC',
+    4: 'ABDBDBDBC',
+    5: 'ABDBDBDBDBC',
+    6: 'ABDBDBDBDBDBC',
+}
+
 module.exports.getTimeData = (departure, arrival) => {
     const currentTime = new Date()
     let arrivalTime
@@ -156,3 +164,28 @@ module.exports.clearScreen = (width,height) => {
     return pixels
 }
 
+module.exports.getDeparture = (data,location) => {
+    for (const [key, departure] of Object.entries(data.departures)) {
+        if (departure.platform_actual === location) {
+            return departure
+        }
+    }
+}
+
+module.exports.getArrival = (data,departure) => {
+    for (const [key, arrivalData] of Object.entries(data.arrivals)) {
+        if(arrivalData.service_id === departure.service_id) {
+            return arrivalData
+        }
+    }
+}
+
+module.exports.getService = (data,station) => {
+    for (const [key, partsData] of Object.entries(data.service.parts)) {
+        for (const [key, stopData] of Object.entries(partsData.stops)) {
+            if (stopData.station.code === station.toUpperCase()) {
+                return stopData
+            }
+        }
+    }
+}

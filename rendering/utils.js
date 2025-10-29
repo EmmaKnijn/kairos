@@ -1,25 +1,28 @@
-    const http = require('http');
+const http = require('http');
+const font = require("./font");
+const tinyFont = require("./tiny-font");
+const symbolFont = require("./symbol-font");
 
-    // source: https://stackoverflow.com/questions/9577611/how-to-make-an-http-get-request-in-node-js-express
+// source: https://stackoverflow.com/questions/9577611/how-to-make-an-http-get-request-in-node-js-express
 
-    /**
-     * getJSON:  RESTful GET request returning JSON object(s)
-     * @param path: the endpoint to call
-     * @param callback: callback to pass the results JSON object(s) back
-     **/
-    module.exports.getJSON = (path, onResult) => {
-      http.get(path, resp => {
-            let data = ''
-            resp.on('data', chunk => {
-                data += chunk
-            })
-            resp.on('end', () => {
-                data = JSON.parse(data)
-                onResult(data)
-            })
+/**
+ * getJSON:  RESTful GET request returning JSON object(s)
+ * @param path: the endpoint to call
+ * @param callback: callback to pass the results JSON object(s) back
+ **/
+module.exports.getJSON = (path, onResult) => {
+    http.get(path, resp => {
+        let data = ''
+        resp.on('data', chunk => {
+            data += chunk
         })
-    };
-    /**
+        resp.on('end', () => {
+            data = JSON.parse(data)
+            onResult(data)
+        })
+    })
+};
+/**
  * Draws text onto the pixels grid.
  * @param {object} pixels - The main pixel grid to draw on.
  * @param {string} text - The string to render.
@@ -107,13 +110,13 @@ module.exports.getTimeData = (departure, arrival) => {
 }
 
 module.exports.isAtStation = (departure, arrival) => {
-        let timeData = module.exports.getTimeData(departure, arrival)
-        if ((timeData.arrivalTime) <= timeData.currentTime) {
-            return true
-        } else {
-            return false
-        }
+    let timeData = module.exports.getTimeData(departure, arrival)
+    if ((timeData.arrivalTime) <= timeData.currentTime) {
+        return true
     }
+
+    return false
+}
 
 module.exports.getPhase = () => {
     const currentTime = new Date()
@@ -124,20 +127,32 @@ module.exports.getPhase = () => {
         signPhase = 2
     } else if (currentTime.getSeconds() < 45) {
         signPhase = 3
-    } else { signPhase = 4}
+    } else { signPhase = 4 }
 
-    return signPhase || 1
+    return signPhase
 }
 
 module.exports.getTrainLength = (type) => {
-        return module.exports.trainLengthLUT[type] || 0
+    return module.exports.trainLengthLUT[type] || 0
+}
+
+module.exports.getBusyness = (type) => {
+    const length = module.exports.getTrainLength(type)
+    let data = {}
+    for (let i = 1; i <= length; i++) {
+        data[i] = Math.round(Math.random() * 3)
     }
-    module.exports.getBusyness = (type) => {
-        const length = module.exports.getTrainLength(type)
-        let data = {}
-        for (let i = 1; i <= length; i++) {
-            data[i] = Math.round(Math.random() * 3)
+    return data
+}
+
+module.exports.clearScreen = (width,height) => {
+    let pixels = {}
+    for (let y = 1;y <= height; y++) {
+        pixels[y] = {}
+        for (let x = 0; x <= width; x++) {
+            pixels[y][x] = {r: 0, g: 0, b: 0}
         }
-        return data
     }
+    return pixels
+}
 

@@ -119,6 +119,11 @@ module.exports.render128x64 = (departure, arrival, service) => {
     //utils.drawText(pixels, destinationline2, 1, 23, textColor, font);
     //utils.drawText(pixels, vialine1, 1, 23 + viaOffset, textColor, tinyFont);
     //utils.drawText(pixels, vialine2, 1, 29 + viaOffset, textColor, tinyFont);
+
+    // commented out due to code not being used
+    // code kept in order to prove it existed
+    // to actual end users, blame uni :)
+
     for (let x = 0; x <= 128; x++) {
         pixels[64][x] = statusColor
     }

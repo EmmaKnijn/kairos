@@ -3,6 +3,7 @@ const tinyFont = require('./fonts/tiny-font')
 const symbolFont = require("./fonts/symbol-font");
 
 const utils = require('./utils')
+const colors = require('./colors')
 
 module.exports.render128x64 = (departure, arrival, service) => {
     let pixels = utils.clearScreen(128,64)
@@ -10,16 +11,12 @@ module.exports.render128x64 = (departure, arrival, service) => {
     let signPhase = utils.getPhase()
     let timeData = utils.getTimeData(departure, arrival)
 
-    const textColor = { r: 255, g: 255, b: 255 }; // White color
-    const redColor = { r: 255, g: 0, b: 0 }; // Red color
-    const greenColor = { r: 0, g: 255, b: 0 }; // Green color
-    const orangeColor = { r: 255, g: 165, b: 0 }; // Orange color
-    const blackColor = {r: 0, g: 0, b: 0}; // Black color
+    const textColor = colors.white
 
     let shownTime
     let minuteDelay = 0
     let statusMessage = ""
-    let statusColor = blackColor
+    let statusColor = colors.black
 
     if (arrival && !utils.isAtStation(departure,arrival)) {
         minuteDelay = timeData.arrivalDelay
@@ -33,7 +30,7 @@ module.exports.render128x64 = (departure, arrival, service) => {
 
     if (utils.isAtStation(departure,arrival)) {
         statusMessage = ""
-        statusColor = greenColor
+        statusColor = colors.green
     }
     let parsedDelay = ""
     let parsedTime = ""
@@ -45,7 +42,7 @@ module.exports.render128x64 = (departure, arrival, service) => {
 
     if (timeUntilEvent + minuteDelay < 1) {
         statusMessage = "Trein vertrekt"
-        statusColor = orangeColor
+        statusColor = colors.orange
     }
     if (signPhase === 1 || signPhase === 3) {
         parsedTime = shownTime.getHours() + ":" + String(shownTime.getMinutes()).padStart(2, '0')
@@ -61,7 +58,7 @@ module.exports.render128x64 = (departure, arrival, service) => {
     }
 
     if (!departure.cancelled) {
-        utils.drawText(pixels, parsedDelay, 1, 2, redColor, font);
+        utils.drawText(pixels, parsedDelay, 1, 2, colors.red, font);
         utils.drawText(pixels, parsedTime, 1 + timeOffset, 2, textColor, font);
     }
     let destinationText = departure.destination_actual

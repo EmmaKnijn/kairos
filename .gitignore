@@ -1,4 +1,4 @@
 rendering/node_modules/
 /.idea/workspace.xml
 /docker-compose.yml
-/data/
+/gotrain-data/

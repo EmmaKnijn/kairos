@@ -31,3 +31,9 @@ services:
       - rendering
       - gotrain
     restart: always
+  gatus: # Ideally this would run on a completely seperate server. Move it if you prefer.
+      volumes:
+      - "./gatus/:/config"
+      image: ghcr.io/twin/gatus:stable
+      ports:
+      - 8092:8080 # Port forward this in your reverse proxy to a subdomain

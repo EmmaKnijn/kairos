@@ -1,0 +1,32 @@
+endpoints:
+  - name: gotrain services
+    group: gotrain
+    url: "http://gotrain:8080/v2/status"
+    interval: 20s
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY].services == UP"
+      - "[RESPONSE_TIME] < 10"
+  - name: gotrain departures
+    group: gotrain
+    url: "http://gotrain:8080/v2/status"
+    interval: 20s
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY].departures == UP"
+      - "[RESPONSE_TIME] < 10"
+  - name: gotrain arrivals
+    group: gotrain
+    url: "http://gotrain:8080/v2/status"
+    interval: 20s
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY].arrivals == UP"
+      - "[RESPONSE_TIME] < 10"
+  - name: rendering
+    group: core
+    url: "http://rendering:3000/dotmatrix/ut/1"
+    interval: 20s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 100"

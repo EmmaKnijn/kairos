@@ -143,7 +143,6 @@ module.exports.render128x64 = (departure, arrival, service) => {
             materialIndex = materialIndex + 1
             const length = utils.getTrainLength(material.type)
             trainString += utils.trainStringLUT[length]
-            //console.log(trainString.length / 2 - material.type.length)
             trainTypeString += material.type.padStart(trainString.length / 2 - material.type.length," ").padEnd(trainString.length / 2 - material.type.length," ")
             offset = trainString.length * symbolFont.width / 2
 

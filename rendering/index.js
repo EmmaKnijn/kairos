@@ -19,7 +19,7 @@ app.get('/dotmatrix/:station/:location', (req, res) => {
             utils.getJSON(endpoint + '/v2/services/service/' + departure.service_number + '/' + departure.service_date, (data) => {
                 let service = utils.getService(data,req.params.station)
 
-                res.send(renderers.render128x64(departure, arrival, service))
+                res.send(renderers.render128x64(departure, arrival, service)) // render the pixels for a 128x64 display and send it to the client
 
             })
         })

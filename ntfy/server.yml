@@ -1,0 +1,2 @@
+#base-url: "http://localhost/ntfy"
+behind-proxy: true

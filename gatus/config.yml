@@ -1,3 +1,23 @@
+ui:
+  description: "Kairos System Health Dashboard"
+  header: "Kairos Health"
+  title: "Health Dashboard | Kairos"
+
+storage:
+  type: "sqlite"
+  path: "/config/data.db"
+
+alerting:
+  ntfy:
+    topic: "uptime"
+    url: "http://ntfy"
+    default-alert:
+      description: "health check failed"
+      send-on-resolved: true
+      failure-threshold: 1
+      success-threshold: 5
+      enabled: true
+
 endpoints:
   - name: gotrain services
     group: gotrain
@@ -7,6 +27,8 @@ endpoints:
       - "[STATUS] == 200"
       - "[BODY].services == UP"
       - "[RESPONSE_TIME] < 10"
+    alerts:
+      - type: ntfy
   - name: gotrain departures
     group: gotrain
     url: "http://gotrain:8080/v2/status"
@@ -15,6 +37,8 @@ endpoints:
       - "[STATUS] == 200"
       - "[BODY].departures == UP"
       - "[RESPONSE_TIME] < 10"
+    alerts:
+      - type: ntfy
   - name: gotrain arrivals
     group: gotrain
     url: "http://gotrain:8080/v2/status"
@@ -23,9 +47,20 @@ endpoints:
       - "[STATUS] == 200"
       - "[BODY].arrivals == UP"
       - "[RESPONSE_TIME] < 10"
+    alerts:
+      - type: ntfy
   - name: rendering
     group: core
     url: "http://rendering:3000/dotmatrix/ut/1"
+    interval: 20s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 100"
+    alerts:
+      - type: ntfy
+  - name: ntfy
+    group: core
+    url: "http://ntfy"
     interval: 20s
     conditions:
       - "[STATUS] == 200"

@@ -1,7 +1,10 @@
 const http = require('http');
+const https = require('https');
 const font = require("./fonts/main-font");
 const tinyFont = require("./fonts/tiny-font");
 const symbolFont = require("./fonts/symbol-font");
+const NSAPITOKEN = process.env.NSAPITOKEN
+
 
 // source: https://stackoverflow.com/questions/9577611/how-to-make-an-http-get-request-in-node-js-express
 
@@ -12,6 +15,18 @@ const symbolFont = require("./fonts/symbol-font");
  **/
 module.exports.getJSON = (path, onResult) => {
     http.get(path, resp => {
+        let data = ''
+        resp.on('data', chunk => {
+            data += chunk
+        })
+        resp.on('end', () => {
+            data = JSON.parse(data)
+            onResult(data)
+        })
+    })
+};
+module.exports.getJSONHTTPS = (options, onResult) => {
+    https.get(options, resp => {
         let data = ''
         resp.on('data', chunk => {
             data += chunk
@@ -144,13 +159,25 @@ module.exports.getTrainLength = (type) => {
     return module.exports.trainLengthLUT[type] || 0
 }
 
-module.exports.getBusyness = (type) => {
+module.exports.busynessLUT = {
+    "LOW": 1,
+    "MEDIUM": 2,
+    "HIGH": 3
+}
+module.exports.getBusyness = (serviceNum,type,stationUic) => {
     const length = module.exports.getTrainLength(type)
     let data = {}
+    console.log("https://gateway.apiportal.ns.nl/virtual-train-api/v1/prognose/" + serviceNum)
+    const host = "gateway.apiportal.ns.nl"
+    const path = "/virtual-train-api/v1/prognose/" + serviceNum
+    module.exports.getJSONHTTPS({host: host, path: path,headers: {"Ocp-Apim-Subscription-Key":NSAPITOKEN}},(data) => {
+        console.log(data)
+    })
     for (let i = 1; i <= length; i++) {
         data[i] = Math.round(Math.random() * 3)
     }
     return data
+
 }
 
 module.exports.clearScreen = (width,height) => {

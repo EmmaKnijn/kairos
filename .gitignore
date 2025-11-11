@@ -2,3 +2,5 @@ rendering/node_modules/
 /.idea/workspace.xml
 /docker-compose.yml
 /gotrain-data/
+gatus/*.db*
+rendering/.env

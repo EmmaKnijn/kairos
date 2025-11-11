@@ -6,7 +6,7 @@ const app = express()
 const utils = require('./utils')
 const renderers = require("./renderers")
 
-const endpoint = process.env.ENDPOINT || 'http://localhost:8080'
+const endpoint = process.env.ENDPOINT || 'http://localhost/gotrain'
 const port = process.env.PORT || 3000
 
 app.get('/dotmatrix/:station/:location', (req, res) => {

@@ -146,7 +146,7 @@ module.exports.render128x64 = (departure, arrival, service) => {
             trainString += utils.trainStringLUT[length]
             trainTypeString += material.type.padStart(trainString.length / 2 - material.type.length," ").padEnd(trainString.length / 2 - material.type.length," ")
             offset = trainString.length * symbolFont.width / 2
-            const busyness = utils.getBusyness(departure.service_id,material.type)
+            const busyness = 1 //utils.getBusyness(departure.service_number,material.type,service)
 
             let characters = 2 + length + length - 1
             if (materialIndex == 1) {

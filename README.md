@@ -1,4 +1,6 @@
 # 🚆Kairos
+*warning* This project is currently on hold! Development has been paused.
+
 Kairos is a public transport information platform. It currently consists of a few components.
 *note* As this is a project developed by me for uni, no support / updates are guaranteed. 
 
